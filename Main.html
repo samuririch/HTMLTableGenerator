@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=!, initial-scale=1.0">
+    <title>HTML Table Generator</title>
+</head>
+<body>
+    <div id="tableInputs">
+        <label>Enter the number of Rows</label>
+        <input type="number" id="rowsInput">
+    
+        <label>Enter the number of Columns</label>
+        <input type="number" id="colsInput">
+    
+        <button onclick="getTableDimensions()">Create Table!</button>
+    </div>
+
+    <div id="tableOutputs">
+        <textarea id="tableCodeOutput">
+
+        </textarea>
+    </div>
+
+</body>
+</html>
+
+<script text="javascript">
+
+function getTableDimensions(){
+    let tableCode = "";
+    let numRows = parseInt(document.getElementById("rowsInput").value);
+    let numColumns = parseInt(document.getElementById("colsInput").value);
+    tableCode += "<table>\n"
+    for(a = 1; a <= numRows; a++){
+        tableCode += "\t<tr>\n"
+        console.log("StartRow");
+        for(b = 1; b <= numColumns; b++){
+            tableCode += "\t\t<td></td>\n"
+            console.log("StartCol");
+            console.log("EndCol");
+        }
+        tableCode += "\t</tr>\n"
+        console.log("EndRow");   
+    }
+    tableCode += "</table>"
+    document.getElementById("tableCodeOutput").innerHTML = tableCode;
+
+
+}
+
+
+</script>
