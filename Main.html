@@ -21,15 +21,17 @@
                     <div style="background-color: lightslategray; text-align: center; position: fixed; top: 10px; left: 10px; width:375px"><h3>Table Generator</h3></div>
                     <div>
                         <label>Enter the number of Rows</label>
-                        <input type="number" id="rowsInput">
+                        <input style="margin-left:6%" type="number" id="rowsInput">
                     </br>
                         <label>Enter the number of Columns</label>
                         <input type="number" id="colsInput">
                     </br>
-                        <label>Add GridLines</label>
-                        <input class="gridCheck" type="checkbox" id="gridlineInput">
+                        <label>Table Height:</label>
+                        <input type="number" id="tableHeight">
                     </br>
-                    <button onclick="getTableDimensions()" type="button" class="btn btn-primary">Create Table!</button>
+                        <label>Table Width:</label>
+                        <input type="number" id="tableWidth">
+                    <button onclick="createTableCode()" type="button" class="btn btn-primary">Create Table!</button>
                     </div>
                 </td>
                 <td>
@@ -41,19 +43,25 @@
         </table>    
     </div>
 
+    <div>
+        <iframe id="tableDisplay">
+
+        </iframe>
+    </div>
+
 
 </body>
 </html>
 
 <script text="javascript">
 
-function getTableDimensions(){
+function createTableCode(){
     let tableCode = "";
     let numRows = parseInt(document.getElementById("rowsInput").value);
     let numColumns = parseInt(document.getElementById("colsInput").value);
-    var gridlineCheck = document.querySelectorAll('.gridCheck').value;
-    console.log(gridlineCheck);
-    tableCode += "<table>\n"
+    let tableHeight = parseInt(document.getElementById("tableHeight").value);
+    let tableWidth = parseInt(document.getElementById("tableWidth").value);
+    tableCode += "<table style='height:" + tableHeight + "px; width:"+ tableWidth + "px'; border=1>\n"
     for(a = 1; a <= numRows; a++){
         tableCode += "\t<tr>\n"
         console.log("StartRow");
@@ -67,9 +75,13 @@ function getTableDimensions(){
     }
     tableCode += "</table>"
     document.getElementById("tableCodeOutput").innerHTML = tableCode;
-
+    
+    const iframe = document.getElementById('tableDisplay');
+    const html = tableCode;
+    iframe.srcdoc = html;
+    iframe.sandbox = '';
+    document.body.appendChild(iframe);
 
 }
-
 
 </script>
