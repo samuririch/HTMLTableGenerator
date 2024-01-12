@@ -59,29 +59,49 @@ function createTableCode(){
     let tableCode = "";
     let numRows = parseInt(document.getElementById("rowsInput").value);
     let numColumns = parseInt(document.getElementById("colsInput").value);
-    let tableHeight = parseInt(document.getElementById("tableHeight").value);
-    let tableWidth = parseInt(document.getElementById("tableWidth").value);
+
+    let heightInput = document.getElementById("tableHeight").value;
+    let widthInput = document.getElementById("tableWidth").value;
+    let tableHeight = undefined;
+    let tableWidth = undefined;
+
+    if(heightInput == ""){
+        document.getElementById("tableHeight").value = "100"
+        tableHeight = parseInt(document.getElementById("tableHeight").value);
+    }
+    else{
+        tableHeight = parseInt(document.getElementById("tableHeight").value);
+    }
+
+    if(widthInput == ""){
+        document.getElementById("tableWidth").value = "100"
+        tableWidth = parseInt(document.getElementById("tableWidth").value);
+    }
+    else{
+        tableWidth = parseInt(document.getElementById("tableWidth").value);
+    }
+
+
     tableCode += "<table style='height:" + tableHeight + "px; width:"+ tableWidth + "px'; border=1>\n"
     for(a = 1; a <= numRows; a++){
         tableCode += "\t<tr>\n"
-        console.log("StartRow");
         for(b = 1; b <= numColumns; b++){
             tableCode += "\t\t<td></td>\n"
-            console.log("StartCol");
-            console.log("EndCol");
         }
         tableCode += "\t</tr>\n"
-        console.log("EndRow");   
     }
     tableCode += "</table>"
-    document.getElementById("tableCodeOutput").innerHTML = tableCode;
-    
+
+    drawTable(tableCode)
+
+}
+
+function drawTable(tableCode){
+    document.getElementById("tableCodeOutput").innerHTML = tableCode;  
     const iframe = document.getElementById('tableDisplay');
     const html = tableCode;
     iframe.srcdoc = html;
     iframe.sandbox = '';
     document.body.appendChild(iframe);
-
 }
-
 </script>
