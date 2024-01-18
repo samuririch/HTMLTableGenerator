@@ -33,7 +33,7 @@
                         <input type="number" id="tableWidth">
                     </br>
                         <label>Add Header?</label>
-                        <input type="checkbox" class="headerInput">
+                        <input type="checkbox" id="headerInput">
                     </div>
                     </br>
                 <button onclick="createTableCode()" type="button" class="btn btn-primary">Create Table!</button>
@@ -65,6 +65,9 @@ function createTableCode(){
     let numColumns = parseInt(document.getElementById("colsInput").value);
     // var headerCheck = document.querySelector('headerInput').value;
 
+    const checkBox = document.getElementById("headerInput");
+    console.log("Checkbox value is: " + checkBox.checked);
+
     let heightInput = document.getElementById("tableHeight").value;
     let widthInput = document.getElementById("tableWidth").value;
     let tableHeight = undefined;
@@ -88,7 +91,14 @@ function createTableCode(){
 
     tableCode += "<table style='height:" + tableHeight + "px; width:"+ tableWidth + "px'; border=1>\n"
 
-    // console.log("Check value is: " + headerCheck);
+    if(checkBox.checked == true){
+     let headerCode = "";
+     headerCode = addHeader(tableCode, numColumns);
+     tableCode += headerCode;
+    }
+    else{
+        alert("No Header!");
+    }
 
     for(a = 1; a <= numRows; a++){
         tableCode += "\t<tr>\n"
@@ -112,7 +122,7 @@ function drawTable(tableCode){
     document.body.appendChild(iframe);
 }
 
-function addHeader(){
+function addHeader(tableCode, numColumns){
     for(i = 1; i < 2; i++){
         tableCode += "\t<tr>\n"
             for(e = 1; e <= numColumns; e++){
@@ -120,5 +130,6 @@ function addHeader(){
             }
             tableCode += "\t</tr>\n"
     }  
+  return tableCode;
 }
 </script>
